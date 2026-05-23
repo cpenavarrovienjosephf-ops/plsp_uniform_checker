@@ -1,88 +1,120 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 
-const AuthContext  = createContext(null)
-const API_BASE     = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api'
-const TOKEN_KEY    = 'uniccheck_token'
+const AuthContext = createContext(null);
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:5000/api";
+const TOKEN_KEY = "uniccheck_token";
 
-async function apiFetch(path, options = {}) {
-  const token = localStorage.getItem(TOKEN_KEY)
-  const res   = await fetch(`${API_BASE}${path}`, {
+// Always pass the token explicitly so we never race against localStorage
+async function apiFetch(path, options = {}, token = null) {
+  const tok = token ?? localStorage.getItem(TOKEN_KEY);
+  const res = await fetch(`${API_BASE}${path}`, {
     headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      "Content-Type": "application/json",
+      ...(tok ? { Authorization: `Bearer ${tok}` } : {}),
       ...(options.headers ?? {}),
     },
     ...options,
-  })
-  const data = await res.json().catch(() => ({}))
-  return { ok: res.ok, status: res.status, data }
+  });
+  const data = await res.json().catch(() => ({}));
+  return { ok: res.ok, status: res.status, data };
 }
 
 export function AuthProvider({ children }) {
-  const [account,      setAccount]      = useState(null)
-  const [student,      setStudent]      = useState(null)
-  const [loginHistory, setLoginHistory] = useState([])
-  const [loading,      setLoading]      = useState(true)   // resolving stored token on mount
+  const [account, setAccount] = useState(null);
+  const [student, setStudent] = useState(null);
+  const [loginHistory, setLoginHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // ── Restore session from stored JWT ──────────────────────────────────────
+  // ── Restore session from stored token on mount ───────────────────────────
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN_KEY)
-    if (!token) { setLoading(false); return }
-
-    ;(async () => {
-      const { ok, data } = await apiFetch('/auth/me')
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+    (async () => {
+      const { ok, data } = await apiFetch("/auth/me", {}, token);
       if (ok) {
-        setAccount(data.account)
-        setStudent(data.student)
-        // fetch history in background
-        apiFetch('/auth/history').then(r => { if (r.ok) setLoginHistory(r.data) })
+        setAccount(data.account);
+        setStudent(data.student);
+        const hr = await apiFetch("/auth/history", {}, token);
+        if (hr.ok && Array.isArray(hr.data)) setLoginHistory(hr.data);
       } else {
-        localStorage.removeItem(TOKEN_KEY)
+        localStorage.removeItem(TOKEN_KEY);
       }
-      setLoading(false)
-    })()
-  }, [])
+      setLoading(false);
+    })();
+  }, []);
 
-  // ── Login ─────────────────────────────────────────────────────────────────
+  // ── Login ────────────────────────────────────────────────────────────────
   const login = useCallback(async (username, password) => {
-    const { ok, data } = await apiFetch('/auth/login', {
-      method: 'POST',
-      body:   JSON.stringify({ username, password }),
-    })
-    if (!ok) return { error: data.error ?? 'Login failed.' }
+    const { ok, data } = await apiFetch("/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    });
+    if (!ok) return { error: data.error ?? "Login failed." };
 
-    localStorage.setItem(TOKEN_KEY, data.token)
-    setAccount(data.account)
-    setStudent(data.student)
-    // fetch history after login
-    apiFetch('/auth/history').then(r => { if (r.ok) setLoginHistory(r.data) })
-    return { success: true }
-  }, [])
+    const token = data.token;
+    localStorage.setItem(TOKEN_KEY, token);
+    setAccount(data.account);
+    setStudent(data.student);
 
-  // ── Register ──────────────────────────────────────────────────────────────
+    // Pass token explicitly — avoids any localStorage timing race
+    const hr = await apiFetch("/auth/history", {}, token);
+    if (hr.ok && Array.isArray(hr.data)) {
+      setLoginHistory(hr.data);
+    }
+
+    return { success: true };
+  }, []);
+
+  // ── Register ─────────────────────────────────────────────────────────────
   const register = useCallback(async ({ name, email, username, password }) => {
-    const { ok, data } = await apiFetch('/auth/register', {
-      method: 'POST',
-      body:   JSON.stringify({ name, email, username, password }),
-    })
-    if (!ok) return { error: data.error ?? 'Registration failed.' }
-    return { success: true }
-  }, [])
+    const { ok, data } = await apiFetch("/auth/register", {
+      method: "POST",
+      body: JSON.stringify({ name, email, username, password }),
+    });
+    if (!ok) return { error: data.error ?? "Registration failed." };
+    return { success: true };
+  }, []);
 
-  // ── Logout ────────────────────────────────────────────────────────────────
+  // ── Logout ───────────────────────────────────────────────────────────────
   const logout = useCallback(async () => {
-    await apiFetch('/auth/logout', { method: 'POST' }).catch(() => {})
-    localStorage.removeItem(TOKEN_KEY)
-    setAccount(null)
-    setStudent(null)
-    setLoginHistory([])
-  }, [])
+    await apiFetch("/auth/logout", { method: "POST" }).catch(() => {});
+    localStorage.removeItem(TOKEN_KEY);
+    setAccount(null);
+    setStudent(null);
+    setLoginHistory([]);
+  }, []);
+
+  // ── Manual refresh ───────────────────────────────────────────────────────
+  const refreshHistory = useCallback(async () => {
+    const hr = await apiFetch("/auth/history");
+    if (hr.ok && Array.isArray(hr.data)) setLoginHistory(hr.data);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ account, student, loginHistory, loading, login, register, logout }}>
+    <AuthContext.Provider
+      value={{
+        account,
+        student,
+        loginHistory,
+        loading,
+        login,
+        register,
+        logout,
+        refreshHistory,
+      }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
-export const useAuth = () => useContext(AuthContext)
+export const useAuth = () => useContext(AuthContext);

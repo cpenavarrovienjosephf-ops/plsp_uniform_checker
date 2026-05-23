@@ -63,38 +63,6 @@ uniform-checker/
 
 ---
 
-## 📡 API Reference
-
-### Auth Endpoints
-
-#### `POST /api/auth/register`
-```json
-{
-  "name": "Maria Santos",
-  "email": "maria@plsp.edu.ph",
-  "username": "maria",
-  "password": "secret123"
-}
-```
-**Response:** `201 { "success": true }`
-
----
-
-#### `POST /api/auth/login`
-```json
-{ "username": "maria", "password": "secret123" }
-```
-**Response:**
-```json
-{
-  "token": "eyJ...",
-  "account": { "account_id": 1, "username": "maria", "last_login": "..." },
-  "student": { "student_id": 1, "name": "Maria Santos", "email": "...", "date_joined": "..." }
-}
-```
-
----
-
 ## 📜 License
 
 For educational use — Pamantasan ng Lungsod ng San Pablo.

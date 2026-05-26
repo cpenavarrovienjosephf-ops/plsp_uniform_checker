@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 1.25rem 2rem;
+  padding: 80px 1rem 2rem;
   background: var(--bg);
 }
 
@@ -52,9 +52,9 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 2.5rem;
+  padding: 2.25rem 2rem;
   width: 100%;
-  max-width: 580px;
+  max-width: 480px;
   box-shadow: var(--shadow-lg);
   animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -62,7 +62,7 @@
 /* ── Top section ── */
 .top {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .logoMark {
@@ -87,19 +87,19 @@
 
 .heading {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.7rem;
   font-weight: 800;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
   color: var(--text);
 }
 
 .schoolName {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--green);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
 
 .sub {
@@ -317,15 +317,19 @@
 /* ── Mobile ── */
 @media (max-width: 520px) {
   .root {
-    padding: 70px 1rem 1.5rem;
+    padding: 70px 0.85rem 1.5rem;
     align-items: flex-start;
   }
   .card {
-    padding: 1.75rem 1.2rem;
+    padding: 1.6rem 1.1rem;
     border-radius: 14px;
+    box-shadow: var(--shadow);
   }
   .heading {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
+  }
+  .top {
+    margin-bottom: 1.4rem;
   }
   .row {
     grid-template-columns: 1fr;
@@ -340,5 +344,17 @@
   }
   .inputPw {
     padding-right: 3rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding: 1.35rem 0.9rem;
+  }
+  .heading {
+    font-size: 1.3rem;
+  }
+  .schoolName {
+    font-size: 0.62rem;
   }
 }

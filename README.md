@@ -28,38 +28,6 @@ A full-stack web application for **Pamantasan ng Lungsod ng San Pablo (PLSP)** s
 | Database | PostgreSQL 16 |
 | Auth | JWT (HS256), PBKDF2-SHA256 password hashing |
 | Container | Docker, Docker Compose |
-| Tunnel | Cloudflare Tunnel (cloudflared) |
-
----
-
-## 📁 Project Structure
-
-```
-uniform-checker/
-├── src/
-│   ├── context/
-│   │   └── AuthContext.jsx       ← JWT-based API client + auth state
-│   ├── data/
-│   │   └── uniforms.js           ← PLSP dress code policy data
-│   ├── pages/
-│   │   ├── LoginPage.jsx
-│   │   ├── RegisterPage.jsx
-│   │   ├── DashboardPage.jsx
-│   │   └── GalleryPage.jsx       ← Uniform gallery
-│   └── components/
-│       └── Navbar.jsx
-├── server/
-│   ├── app.py                    ← Flask API + PostgreSQL
-│   ├── requirements.txt
-│   ├── init_db.sql
-│   └── .env.example
-├── public/
-│   └── images/uniforms/          ← Uniform reference images
-├── Dockerfile                    ← Multi-stage build (React + Flask)
-├── docker-compose.yml            ← App + DB services
-├── vite.config.js                ← /api proxy for local dev
-└── .env                          ← VITE_API_URL
-```
 
 ---
 

@@ -321,14 +321,14 @@
 /* ── Mobile ── */
 @media (max-width: 520px) {
   .root {
-    padding: 70px 1.1rem 2rem;
+    padding: 70px 1.5rem 2rem;
     align-items: flex-start;
   }
   .card {
-    padding: 1.65rem 1.25rem;
+    width: min(400px, calc(100vw - 3rem));
+    padding: 1.65rem 1.35rem;
     border-radius: 14px;
     box-shadow: var(--shadow);
-    max-width: 100%;
   }
   .heading {
     font-size: 1.4rem;
@@ -354,10 +354,11 @@
 
 @media (max-width: 400px) {
   .root {
-    padding: 68px 0.9rem 2rem;
+    padding: 68px 1.25rem 2rem;
   }
   .card {
-    padding: 1.4rem 1rem;
+    width: min(400px, calc(100vw - 2.5rem));
+    padding: 1.4rem 1.1rem;
   }
   .heading {
     font-size: 1.25rem;
@@ -374,10 +375,11 @@
 
 @media (max-width: 360px) {
   .root {
-    padding: 66px 0.75rem 1.5rem;
+    padding: 66px 1rem 1.5rem;
   }
   .card {
-    padding: 1.25rem 0.9rem;
+    width: min(400px, calc(100vw - 2rem));
+    padding: 1.25rem 1rem;
   }
   .heading {
     font-size: 1.15rem;

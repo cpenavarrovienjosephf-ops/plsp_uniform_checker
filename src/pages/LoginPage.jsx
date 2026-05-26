@@ -80,7 +80,7 @@ export default function LoginPage() {
         <div className={styles.blob1} />
         <div className={styles.blob2} />
       </div>
-      <div className={styles.card} style={{ maxWidth: 420 }}>
+      <div className={styles.card}>
         <div className={styles.top}>
           <div className={styles.logoMark}>
             <SchoolIcon />

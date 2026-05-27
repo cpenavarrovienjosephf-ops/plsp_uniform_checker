@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Same rounded square background as the navbar logoMark -->
   <rect width="64" height="64" rx="14" fill="#1a7a3c"/>
-  <!-- Stacked layers icon (3 rhombus shapes) -->
-  <!-- Top layer -->
-  <polygon points="32,10 50,20 32,30 14,20" fill="rgba(255,255,255,0.95)"/>
-  <!-- Middle layer -->
-  <polygon points="32,24 50,34 32,44 14,34" fill="rgba(255,255,255,0.65)"/>
-  <!-- Bottom layer -->
-  <polygon points="32,38 50,48 32,58 14,48" fill="rgba(255,255,255,0.35)"/>
+  <!-- Exact same paths as Navbar.jsx, scaled to fit 64x64 with padding -->
+  <!-- viewBox 0 0 24 24 → scale to ~44px centered in 64px = offset 10, scale 44/24 ≈ 1.833 -->
+  <g transform="translate(10, 10) scale(1.833)" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+    <path d="M2 17l10 5 10-5"/>
+    <path d="M2 12l10 5 10-5"/>
+  </g>
 </svg>

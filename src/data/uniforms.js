@@ -66,6 +66,19 @@ export const UNIFORMS = [
     accent: "#4ade80",
   },
   {
+    uniform_id: 2,
+    category: "Top",
+    day_type: "Official Uniform",
+    gender: "Female",
+    is_proper: true,
+    label: "Official School Uniform Blouse",
+    description:
+      "Prescribed PLSP official school uniform blouse for female students. Required on Monday, Wednesday, and Friday.",
+    image: "/images/uniforms/unif.jpg",
+    color: "#1a3d2b",
+    accent: "#4ade80",
+  },
+  {
     uniform_id: 3,
     category: "Top",
     day_type: "Wash Day",
@@ -158,6 +171,19 @@ export const UNIFORMS = [
     label: "Black Closed Shoes",
     description:
       "Polished black closed shoes are required when wearing the official school uniform.",
+    image: "/images/uniforms/black_shoes.jpg",
+    color: "#1a1a2e",
+    accent: "#9ca3af",
+  },
+  {
+    uniform_id: 22,
+    category: "Shoes",
+    day_type: "Official Uniform",
+    gender: "Female",
+    is_proper: true,
+    label: "Black Closed Shoes (Female)",
+    description:
+      "Polished black closed shoes are required for female students when wearing the official school uniform.",
     image: "/images/uniforms/black_shoes.jpg",
     color: "#1a1a2e",
     accent: "#9ca3af",

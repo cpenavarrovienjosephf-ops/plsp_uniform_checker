@@ -104,6 +104,30 @@ export const UNIFORMS = [
     accent: "#60a5fa",
   },
   {
+    uniform_id: 5,
+    category: "Top",
+    day_type: "Alternate Uniform",
+    is_proper: true,
+    label: "White Polo Shirt",
+    description:
+      "White polo shirt paired with slacks or pants is an approved alternate uniform top option.",
+    image: "/images/uniforms/white polo shirt.jpg",
+    color: "#f8fafc",
+    accent: "#64748b",
+  },
+  {
+    uniform_id: 25,
+    category: "Top",
+    day_type: "Freestyle",
+    is_proper: true,
+    label: "White T-Shirt",
+    description:
+      "Any white T-shirt with minimal designs is allowed on Freestyle days.",
+    image: "/images/uniforms/white shirt.jpg",
+    color: "#f8fafc",
+    accent: "#64748b",
+  },
+  {
     uniform_id: 6,
     category: "Top",
     day_type: "Wash Day",
@@ -164,6 +188,18 @@ export const UNIFORMS = [
     image: "/images/uniforms/bot_unif.jpg",
     color: "#1a2a4a",
     accent: "#93c5fd",
+  },
+  {
+    uniform_id: 24,
+    category: "Bottom",
+    day_type: "Alternate Uniform / Freestyle",
+    is_proper: true,
+    label: "Maong Pants",
+    description:
+      "Maong pants are an approved alternate uniform bottom option and are allowed as a proper bottom on Freestyle days.",
+    image: "/images/uniforms/maong pants.jpg",
+    color: "#334155",
+    accent: "#cbd5e1",
   },
   {
     uniform_id: 11,

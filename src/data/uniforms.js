@@ -57,6 +57,7 @@ export const UNIFORMS = [
     uniform_id: 1,
     category: "Top",
     day_type: "Official Uniform",
+    gender: "Male",
     is_proper: true,
     label: "Official School Uniform (Top)",
     description:
@@ -155,6 +156,7 @@ export const UNIFORMS = [
     uniform_id: 10,
     category: "Bottom",
     day_type: "Official Uniform / Wash Day",
+    gender: "Male",
     is_proper: true,
     label: "Slacks / Pants",
     description:
@@ -167,6 +169,7 @@ export const UNIFORMS = [
     uniform_id: 11,
     category: "Shoes",
     day_type: "Official Uniform",
+    gender: "Male",
     is_proper: true,
     label: "Black Closed Shoes",
     description:

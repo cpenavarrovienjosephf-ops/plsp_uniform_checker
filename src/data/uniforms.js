@@ -74,7 +74,7 @@ export const UNIFORMS = [
     label: "Official School Uniform Blouse",
     description:
       "Prescribed PLSP official school uniform blouse for female students. Required on Monday, Wednesday, and Friday.",
-    image: "/images/uniforms/Blous.jpg",
+    image: "/images/uniforms/Blouse.jpg",
     color: "#1a3d2b",
     accent: "#4ade80",
   },

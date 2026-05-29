@@ -171,7 +171,9 @@ export default function GalleryPage() {
                   {u.category}
                 </span>
                 {u.gender && (
-                  <span className={`${styles.tag} ${styles.tagGender}`}>
+                  <span
+                    className={`${styles.tag} ${styles.tagGender} ${u.gender === "Female" ? styles.tagGenderFemale : ""}`}
+                  >
                     {u.gender}
                   </span>
                 )}
@@ -260,7 +262,9 @@ export default function GalleryPage() {
                   {selected.category}
                 </span>
                 {selected.gender && (
-                  <span className={`${styles.tag} ${styles.tagGender}`}>
+                  <span
+                    className={`${styles.tag} ${styles.tagGender} ${selected.gender === "Female" ? styles.tagGenderFemale : ""}`}
+                  >
                     {selected.gender}
                   </span>
                 )}

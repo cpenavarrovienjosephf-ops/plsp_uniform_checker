@@ -147,7 +147,10 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
   box-shadow: var(--shadow-sm);
 }
 .card:hover {
@@ -267,6 +270,11 @@
   background: #0e2740;
   color: #93c5fd;
   border: 1px solid #1e3a5f;
+}
+.tagGenderFemale {
+  background: #fce7f3;
+  color: #be185d;
+  border: 1px solid #f9a8d4;
 }
 .tagDay {
   background: #1c1917;
